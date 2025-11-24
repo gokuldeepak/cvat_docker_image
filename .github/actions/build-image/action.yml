@@ -1,0 +1,17 @@
+name: "Build a Docker image"
+description: "Build a docker image with a given name and dockerfile"
+
+inputs:
+  image_name:
+    required: true
+  dockerfile:
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - name: Build Docker image
+      run: |
+        docker build -t "${{ inputs.image_name }}:latest" \
+        -f "${{ inputs.dockerfile }}" .
+      shell: bash
