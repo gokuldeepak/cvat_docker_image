@@ -1,0 +1,30 @@
+name: "Build a Docker image"
+description: "Build a docker image with passed name, dockerfile, tag and build context"
+
+inputs:
+  image_name:
+    required: true
+    
+  dockerfile:
+    required: false
+    default: 'Dockerfile'
+    
+  tag:
+    required: false
+    default: 'latest'
+    
+  build_context:
+    required: false
+    default: '.'
+
+runs:
+  using: "composite"
+  steps:
+    - name: Build image ${{ inputs.image_name }}
+      run: |
+        docker build --target ${{ inputs.image_name }} -t "${{ inputs.image_name }}:${{ inputs.tag }}" \
+        -f "${{ inputs.dockerfile }}" "${{ inputs.build_context }}" 
+      shell: bash
+
+
+
