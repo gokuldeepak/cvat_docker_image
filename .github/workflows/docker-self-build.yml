@@ -23,13 +23,20 @@ jobs:
       - name: Check docker version
         run: docker version
 
-      - name: Build backend image
-        run: |
-          docker build -t cvat-server:latest -f Dockerfile.server .
+      - uses: ./.github/actions/build-image
+        with:
+          image_name: cvat-server
+          dockerfile: Dockerfile.server
 
-      - name: Build UI image
-        run: |
-          docker build -t cvat-ui:latest -f Dockerfile.ui .
+      - uses: ./.github/actions/build-image
+        with:
+          image_name: cvat-ui
+          dockerfile: Dockerfile.ui
+
+      - uses: ./.github/actions/build-image
+        with:
+          image_name: redis-inme
+          dockerfile: Dockerfile.redis-inme
 
       - name: Show built images
         run: docker images
