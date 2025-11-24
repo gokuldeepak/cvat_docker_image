@@ -54,6 +54,6 @@ FROM apache/kvrocks:2.12.1 AS cvat-redis-ondisk
 #############################
 # Traefik Image
 #############################
-FROM traefik:v3.3 AS traefik
+FROM traefik:v3.3 AS cvat-traefik
 
 
