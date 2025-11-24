@@ -6,12 +6,15 @@ inputs:
     required: true
   dockerfile:
     required: true
+  tag:
+    required: false
+    default: 'latest'
 
 runs:
   using: "composite"
   steps:
     - name: Build image ${{ inputs.image_name }}
       run: |
-        docker build -t "${{ inputs.image_name }}:latest" \
+        docker build -t "${{ inputs.image_name }}:${{ inputs.tag }}" \
         -f "${{ inputs.dockerfile }}" .
       shell: bash
