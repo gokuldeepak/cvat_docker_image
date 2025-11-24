@@ -8,8 +8,12 @@ on:
   workflow_dispatch:
 
 jobs:
-  build-and-run:
+
+  build-images:
     runs-on: self-hosted
+    strategy:
+      matrix:
+        image_name: [ "cvat-server", "cvat-ui", "cvat-opa" ]
 
     steps:
       - name: Checkout repository
@@ -21,26 +25,20 @@ jobs:
       - name: Check docker version
         run: docker version
 
-      - name: Building Containers
-        run: |
+      - name: Build Docker image ${{ matrix.image_name }}
+        uses: ./.github/actions/build-image-stage
+        with:
+          image_name: ${{ matrix.image_name }}
 
-          docker build . --target cvat-server -t cvat-server:latest
-          docker build . --target cvat-ui -t cvat-ui:latest
-          docker build . --target cvat-redis-inmem -t cvat-redis-inmem:latest
-          docker build . --target cvat-redis-ondisk -t cvat-redis-ondisk:latest
-          docker build . --target cvat-postgres -t cvat-postgres:latest
-          docker build . --target cvat-clickhouse -t cvat-clickhouse:latest
-          docker build . --target cvat-opa -t cvat-opa:latest
-          docker build . --target cvat-grafana -t cvat-grafana:latest
-          docker build . --target cvat-traefik -t cvat-traefik:latest
-          
-
+  deploy:
+    runs-on: self-hosted
+    needs: build-images     # ⬅ ensures all images are built first
+    steps:
       - name: Show built images
         run: docker images
 
       - name: Run docker compose
-        run: |
-          docker compose -f docker-compose-self-build.yml up -d
+        run: docker compose -f docker-compose-self-build.yml up -d
 
       - name: Show running containers
         run: docker ps -a
