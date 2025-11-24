@@ -10,7 +10,7 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - name: Build Docker image
+    - name: Build image ${{ inputs.image_name }}
       run: |
         docker build -t "${{ inputs.image_name }}:latest" \
         -f "${{ inputs.dockerfile }}" .
