@@ -13,7 +13,7 @@ jobs:
     runs-on: self-hosted
     strategy:
       matrix:
-        image_name: [ "cvat-server", "cvat-ui", "cvat-opa" ]
+        image_name: [ "cvat-server", "cvat-ui", "cvat-redis-inmem", "cvat-redis-ondisk", "cvat-postgres", "cvat-clickhouse", "cvat-opa" ]
 
     steps:
       - name: Checkout repository
@@ -32,7 +32,7 @@ jobs:
 
   deploy:
     runs-on: self-hosted
-    needs: build-images     # ⬅ ensures all images are built first
+    needs: build-images  
     steps:
       - name: Show built images
         run: docker images
