@@ -39,6 +39,7 @@ services:
   cvat_db:
     container_name: cvat_db
     image: cvat-postgres:latest
+    pull_policy: never
     restart: always
     environment:
       POSTGRES_USER: root
@@ -52,6 +53,7 @@ services:
   cvat_redis_inmem:
     container_name: cvat_redis_inmem
     image: cvat-redis-inmem:latest
+    pull_policy: never
     restart: always
     command: [
       "redis-server",
@@ -66,6 +68,7 @@ services:
   cvat_redis_ondisk:
     container_name: cvat_redis_ondisk
     image: cvat-redis-ondisk:latest
+    pull_policy: never
     restart: always
     # The kvrocks image a) has a healthcheck command, and b) has a root process
     # that doesn't reap children, so it's susceptible to the problem described here:
@@ -84,6 +87,7 @@ services:
   cvat_server:
     container_name: cvat_server
     image: cvat-server:latest
+    pull_policy: never
     restart: always
     depends_on:
       <<: *backend-deps
@@ -120,6 +124,7 @@ services:
   cvat_worker_utils:
     container_name: cvat_worker_utils
     image: cvat-server:latest
+    pull_policy: never
     restart: always
     depends_on: *backend-deps
     environment:
@@ -137,6 +142,7 @@ services:
   cvat_worker_import:
     container_name: cvat_worker_import
     image: cvat-server:latest
+    pull_policy: never
     restart: always
     depends_on: *backend-deps
     environment:
@@ -153,6 +159,7 @@ services:
   cvat_worker_export:
     container_name: cvat_worker_export
     image: cvat-server:latest
+    pull_policy: never
     restart: always
     depends_on: *backend-deps
     environment:
@@ -169,6 +176,7 @@ services:
   cvat_worker_annotation:
     container_name: cvat_worker_annotation
     image: cvat-server:latest
+    pull_policy: never
     restart: always
     depends_on: *backend-deps
     environment:
@@ -185,6 +193,7 @@ services:
   cvat_worker_webhooks:
     container_name: cvat_worker_webhooks
     image: cvat-server:latest
+    pull_policy: never
     restart: always
     depends_on: *backend-deps
     environment:
@@ -201,6 +210,7 @@ services:
   cvat_worker_quality_reports:
     container_name: cvat_worker_quality_reports
     image: cvat-server:latest
+    pull_policy: never
     restart: always
     depends_on: *backend-deps
     environment:
@@ -217,6 +227,7 @@ services:
   cvat_worker_chunks:
     container_name: cvat_worker_chunks
     image: cvat-server:latest
+    pull_policy: never
     restart: always
     depends_on: *backend-deps
     environment:
@@ -233,6 +244,7 @@ services:
   cvat_worker_consensus:
     container_name: cvat_worker_consensus
     image: cvat-server:latest
+    pull_policy: never
     restart: always
     depends_on: *backend-deps
     environment:
@@ -249,6 +261,7 @@ services:
   cvat_ui:
     container_name: cvat_ui
     image: cvat-ui:latest
+    pull_policy: never
     restart: always
     depends_on:
       - cvat_server
@@ -262,6 +275,7 @@ services:
 
   traefik:
     image: cvat-traefik:latest
+    pull_policy: never
     container_name: traefik
     restart: always
     ports:
@@ -313,6 +327,7 @@ services:
   cvat_opa:
     container_name: cvat_opa
     image: cvat-opa:latest
+    pull_policy: never
     restart: always
     networks:
       cvat:
@@ -331,6 +346,7 @@ services:
   cvat_clickhouse:
     container_name: cvat_clickhouse
     image: cvat-clickhouse:latest
+    pull_policy: never
     restart: "always"
     environment:
       <<: *clickhouse-env
@@ -344,6 +360,7 @@ services:
   cvat_vector:
     container_name: cvat_vector
     image: cvat-vector:latest
+    pull_policy: never
     user: "1000:1000" # Workaround for <https://github.com/vectordotdev/vector/issues/1599>.
     restart: always
     depends_on:
@@ -364,6 +381,7 @@ services:
 
   cvat_grafana:
     image: cvat-grafana:latest
+    pull_policy: never
     restart: always
     container_name: cvat_grafana
     environment:
