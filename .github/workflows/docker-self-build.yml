@@ -21,61 +21,61 @@ jobs:
       - name: Check docker version
         run: docker version
 
-      - name: cvat-server
+      - name: Build Docker image cvat-server
         uses: ./.github/actions/build-image
         with:
           image_name: cvat-server
           dockerfile: Dockerfile.server
 
-      - name: cvat-server
+      - name: Build Docker image cvat-server
         uses: ./.github/actions/build-image
         with:
           image_name: cvat-ui
           dockerfile: Dockerfile.ui
 
-      - name: cvat-redis-inmem
+      - name: Build Docker image cvat-redis-inmem
         uses: ./.github/actions/build-image
         with:
           image_name: cvat-redis-inmem
           dockerfile: Dockerfile.redis-inmem
 
-      - name: cvat-redis-ondisk
+      - name: Build Docker image cvat-redis-ondisk
         uses: ./.github/actions/build-image
         with:
           image_name: cvat-redis-ondisk
           dockerfile: Dockerfile.redis-ondisk
 
-      - name: cvat-postgres
+      - name: Build Docker image cvat-postgres
         uses: ./.github/actions/build-image
         with:
           image_name: cvat-postgres
           dockerfile: Dockerfile.postgres
 
-      - name: cvat-clickhouse
+      - name: Build Docker image cvat-clickhouse
         uses: ./.github/actions/build-image
         with:
           image_name: cvat-clickhouse
           dockerfile: Dockerfile.clickhouse
 
-      - name: cvat-opa
+      - name: Build Docker image cvat-opa
         uses: ./.github/actions/build-image
         with:
           image_name: cvat-opa
           dockerfile: Dockerfile.opa
 
-      - name: cvat-vector
+      - name: Build Docker image cvat-vector
         uses: ./.github/actions/build-image
         with:
           image_name: cvat-vector
           dockerfile: Dockerfile.vector
 
-      - name: cvat-grafana
+      - name: Build Docker image cvat-grafana
         uses: ./.github/actions/build-image
         with:
           image_name: cvat-grafana
           dockerfile: Dockerfile.grafana
 
-      - name: cvat-traefik
+      - name: Build Docker image cvat-traefik
         uses: ./.github/actions/build-image
         with:
           image_name: cvat-traefik
