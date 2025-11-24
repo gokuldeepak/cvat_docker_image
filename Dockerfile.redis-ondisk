@@ -1,0 +1,1 @@
+FROM apache/kvrocks:2.12.1
