@@ -27,7 +27,7 @@ jobs:
           image_name: cvat-server
           dockerfile: Dockerfile.server
 
-      - name: Build Docker image cvat-server
+      - name: Build Docker image cvat-ui
         uses: ./.github/actions/build-image
         with:
           image_name: cvat-ui
