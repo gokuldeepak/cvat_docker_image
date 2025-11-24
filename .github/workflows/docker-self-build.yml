@@ -38,6 +38,41 @@ jobs:
           image_name: redis-inme
           dockerfile: Dockerfile.redis-inmem
 
+      - uses: ./.github/actions/build-image
+        with:
+          image_name: redis-ondisk
+          dockerfile: Dockerfile.redis-ondisk
+		  
+	  - uses: ./.github/actions/build-image
+        with:
+          image_name: postgres
+          dockerfile: Dockerfile.postgres
+		  
+	  - uses: ./.github/actions/build-image
+        with:
+          image_name: clickhouse
+          dockerfile: Dockerfile.clickhouse
+	  - uses: ./.github/actions/build-image
+        with:
+          image_name: opa
+          dockerfile: Dockerfile.opa
+
+      - uses: ./.github/actions/build-image
+        with:
+          image_name: vector
+          dockerfile: Dockerfile.vector
+		  
+	  - uses: ./.github/actions/build-image
+        with:
+          image_name: grafana
+          dockerfile: Dockerfile.grafana
+		  
+	  - uses: ./.github/actions/build-image
+        with:
+          image_name: traefik
+          dockerfile: Dockerfile.traefik
+      
+
       - name: Show built images
         run: docker images
 
