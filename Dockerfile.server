@@ -1,0 +1,1 @@
+FROM cvat/server:v2.49.0
